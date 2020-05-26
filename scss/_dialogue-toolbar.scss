@@ -1,0 +1,126 @@
+.o-dialogue-hide-button {
+  display: none !important;
+  background-color: transparent;
+  color: #424242;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.o-dialogue {
+  transition: .4s ease all;
+  flex-direction: row;
+}
+.o-dialogue-button {
+  border-radius: 18px;
+  background-color: #fff;
+  border: none;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  color: #909090;
+	cursor: pointer;
+  display: inline-block;
+  height: 2.5rem;
+  position: relative;
+  padding: .5rem;
+  text-align: center;
+  text-decoration: none;
+  min-width: 4rem;
+  width: fit-content;
+  pointer-events: all;
+  transition: .4s ease all
+}
+.o-dialogue-active {
+  -webkit-box-shadow: inset 0 0 0 2px #66ccff;
+  box-shadow: inset 0 0 0 2px #66ccff;
+}
+.height-250 {
+  height: 2.50rem;
+}
+.o-popover {
+  --before-border-top-color: #cccccc;
+}
+.o-popover:before,
+.o-popover:after {
+  display: block;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.o-popover:after {
+  border-top-color: white;
+  border-width: 10px;
+  left: 50%;
+  margin-left: -10px;
+  bottom: -20px;
+}
+.o-popover:before {
+  border-top-color: var(--before-border-top-color) !important;
+  border-width: 13px !important;
+  left: 50% !important;
+  margin-left: -13px !important;
+  bottom: -26px !important;
+}
+
+.o-popover-block {
+  display: inline-block;
+}
+.o-popover p {
+  margin: 0 .5em;
+  font-size: 80%;
+}
+.o-dialogue-layer-button .icon {
+  float: left;
+  margin-right: .375rem;
+}
+.o-dialogue-layer-button span {
+  line-height: 2em;
+  vertical-align: super;
+  position: initial;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+}
+.dialogue-unchecked span {
+  opacity: 0.5;
+  transition: .4s ease all
+}
+.o-dialogue-hide {
+  -ms-transform: translate(-50%, 4em) !important;
+  -webkit-transform: translate(-50%, 4em) !important;
+  transform: translate(-50%, calc(100% - 1.5em)) !important;
+}
+
+@media screen and (max-width: 1000px) {
+  .o-dialogue {
+    max-width: 50% !important;
+    flex-direction: column;
+  }
+  .o-popover-block {
+    margin: 0 50%;
+    width: 100%;
+  }
+  .o-popover-container {
+    width: 100%;
+  }
+  .o-popover-block .o-popover-container {
+    width: auto;
+    left: -65px;
+  }
+  .o-popover.o-active {
+    display: none;
+  }
+  .o-dialogue-button {
+    width: 100% !important;
+    margin-bottom: .3em !important;
+  }
+  .o-dialogue-hide-button {
+    display: inline-block !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .o-dialogue {
+    max-width: 75% !important;
+  }
+}
