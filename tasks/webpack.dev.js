@@ -4,7 +4,7 @@ const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = merge(common, {
   output: {
-    path: `${__dirname}/../../../origo_v2/plugins/dialogue`,
+    path: `${__dirname}/../../../origo/plugins/dialogue`,
     publicPath: '/build/js',
     filename: 'dialogue.js',
     libraryTarget: 'var',

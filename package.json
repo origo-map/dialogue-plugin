@@ -7,8 +7,8 @@
   "scripts": {
     "start": "npm run prebuild-sass | run-p watch-js watch-sass",
     "watch-js": "webpack-dev-server --config ./tasks/webpack.dev.js --mode development",
-    "watch-sass": "node-sass -w --include-path scss scss/dialogue.scss ../../origo_v2/plugins/dialogue/dialogue.css",
-    "prebuild-sass": "node-sass --include-path scss scss/dialogue.scss ../../origo_v2/plugins/dialogue/dialogue.css",
+    "watch-sass": "node-sass -w --include-path scss scss/dialogue.scss ../../origo/plugins/dialogue/dialogue.css",
+    "prebuild-sass": "node-sass --include-path scss scss/dialogue.scss ../../origo/plugins/dialogue/dialogue.css",
     "build": "webpack --config ./tasks/webpack.prod.js && npm run build-sass",
     "build-sass": "node-sass --include-path scss scss/dialogue.scss build/css/dialogue.css"
   },
