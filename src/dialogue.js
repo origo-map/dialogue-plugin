@@ -6,7 +6,7 @@ import voter from './controls/voter';
 const Dialogue = function Dialogue(options = {}) {
   const {
     mode = 'edit',
-    autoForm = false,
+    autoForm = true,
     autoSave = true
   } = options;
   let viewer;

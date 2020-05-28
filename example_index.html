@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
+	<title>Origo exempel</title>
+	<link href="css/style.css" rel="stylesheet">
+	<link href="plugins/dialogue/dialogue.css" rel="stylesheet">
+	<link rel="shortcut icon" href="img/png/logo.png">
+</head>
+<body>
+<div id="app-wrapper">
+</div>
+<script src="js/origo.js"></script>
+<script src="plugins/dialogue/dialogue.js"></script>
+<script type="text/javascript">
+	var origo = Origo('example_view.json');
+	origo.on('load', function(viewer) {
+			var d = Dialogue({
+				mode: 'view',
+				autoForm: true,
+				defaultBackgroundColor: '#fff',
+				defaultTextColor: '#333',
+				goToLink: 'https://github.com/origo-map/origo',
+				snap: false,
+				voter: {
+					active: true,
+					options: {
+		        layers: {
+		          editor_polygon: 'highlight',
+		          editor_line: 'highlight'
+		        }
+		      }
+				}
+			}, viewer);
+			viewer.addComponent(d);
+	});
+</script>
+</body>
+</html>

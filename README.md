@@ -82,9 +82,9 @@ This plugin includes two different modes - **view** and **edit**. It is recommen
 ```
 
 ##### *PRO TIP!*
-By utilizing URL search parameters, you can use the same HTML file for both modes. Use an URL like `https://mydialogue.example.com?mode=view` (for view mode) and replace any references to the mode in the startup script with the URL search parameter 'mode'.
+By utilizing URL search parameters, you can use the same HTML file for both modes. Use an URL like `https://mydialogue.example.com?mode=view` (for view mode) and replace any references to the mode in the startup script with the URL search parameter 'mode'. *Please note that `URLSearchParams` is not compatible with IE*.
 
-Example:
+Example for non-crappy browsers:
 ```javascript
 var dialogue = Dialogue({
   mode: new URLSearchParams(document.location.search).get('mode'),
@@ -93,15 +93,50 @@ var dialogue = Dialogue({
 });
 ```
 
+Example for IE:
+```javascript
+var urlParam = function(name){
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	if (results == null){
+		return null;
+	}
+	else {
+		return decodeURI(results[1]) || 0;
+	}
+};
+
+var mode = urlParam('mode');
+var dialogue = Dialogue({
+  mode,
+  defaultBackgroundColor: '#333',
+  goToLink: 'https://github.com/origo-map/origo'
+});
+```
+
 ## Settings
-### Dialogue component settings
+### Dialogue component settings (in html file)
 Option | Type | Description
 ---|---|---
 `mode` | string | Sets the current dialogue mode. Accepted values are `view` and `edit`. Default is `edit`.
+`autoForm` | boolean | Sets if the edit form should open automatically when adding an object to the map. Only applicable in *edit* mode. Default is `true`.
 `defaultBackgroundColor` | string | Default background color code of the dialogue layer controls. Default is `#333`.
+`snap` | Boolean | Sets if snapping should be active in edit mode. Only applicable in *edit* mode. Default is `true`.
 `goToLink` | string | URL to be loaded after completed edit session. Optional.
+`voter` | object | A control that allows the user to vote for or "like" a dialogue object. Only applicable in *view* mode. See settings below.
 
-### Layer Settings
+```js
+voter: {
+	active: true,
+	options: {
+		layers: { // List of layers for which the voter control should be active
+			editor_polygon: 'highlight', // Name of layer and the attribute used for storing the vote count
+			editor_line: 'highlight'
+		}
+	}
+}
+```
+
+### Layer Settings (in config file)
 #### *View/Edit mode*
 *Please note that only plugin specific settings are documented here. Standard Origo layer settings still apply.*
 
