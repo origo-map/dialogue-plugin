@@ -389,15 +389,21 @@ function onAttributesSave(feature, attrs) {
         if (file) {
           fileReader = new FileReader();
           fileReader.onload = () => {
-            getImageOrientation(file, (orientation) => {
-              imageresizer(fileReader.result, attribute, orientation, (resized) => {
-                editEl[attribute.name] = resized;
-                $(document).trigger('imageresized');
+            if (typeof file !== 'undefined') {
+              getImageOrientation(file, (orientation) => {
+                imageresizer(fileReader.result, attribute, orientation, (resized) => {
+                  editEl[attribute.name] = resized;
+                  $(document).trigger('imageresized');
+                });
               });
-            });
+            }
           };
 
           fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+            editEl[attribute.name] = fileReader.result;
+            $(document).trigger('imageresized');
+          };
         } else {
           editEl[attribute.name] = $(attribute.elId).attr('value');
         }
