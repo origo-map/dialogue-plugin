@@ -349,9 +349,7 @@ function onAttributesSave(feature, attrs) {
   $('#o-save-button').on('click', (e) => {
     const editEl = {};
     const checkboxValues = [];
-    let fileReader;
-    let input;
-    let file;
+    const fileReaders = [];
 
     // Read values from form
     attrs.forEach((attribute) => {
@@ -383,27 +381,22 @@ function onAttributesSave(feature, attrs) {
       }
       // Check if file. If file, read and trigger resize
       if ($(attribute.elId).attr('type') === 'file') {
-        input = $(attribute.elId)[0];
-        file = input.files[0];
+        const input = $(attribute.elId)[0];
+        const file = input.files[0];
 
         if (file) {
-          fileReader = new FileReader();
+          const fileReader = new FileReader();
           fileReader.onload = () => {
-            if (typeof file !== 'undefined') {
-              getImageOrientation(file, (orientation) => {
-                imageresizer(fileReader.result, attribute, orientation, (resized) => {
-                  editEl[attribute.name] = resized;
-                  $(document).trigger('imageresized');
-                });
+            getImageOrientation(file, (orientation) => {
+              imageresizer(fileReader.result, attribute, orientation, (resized) => {
+                editEl[attribute.name] = resized;
+                $(document).trigger('imageresized');
               });
-            }
+            });
           };
 
           fileReader.readAsDataURL(file);
-          fileReader.onload = () => {
-            editEl[attribute.name] = fileReader.result;
-            $(document).trigger('imageresized');
-          };
+          fileReaders.push(fileReader);
         } else {
           editEl[attribute.name] = $(attribute.elId).attr('value');
         }
@@ -415,7 +408,7 @@ function onAttributesSave(feature, attrs) {
       }
     });
 
-    if (fileReader && fileReader.readyState === 1) {
+    if (fileReaders.length > 0 && fileReaders.every(reader => reader.readyState === 1)) {
       $(document).on('imageresized', () => {
         attributesSaveHandler(feature, editEl);
       });
