@@ -83,7 +83,7 @@ function getFeaturesByIds(type, layer, ids) {
 }
 
 function getDefaultValues(attrs) {
-  return attrs.filter(attribute => attribute.name && attribute.defaultValue)
+  return attrs.filter((attribute) => attribute.name && attribute.defaultValue)
     .reduce((prev, curr) => {
       const previous = prev;
       previous[curr.name] = curr.defaultValue;
@@ -92,7 +92,7 @@ function getDefaultValues(attrs) {
 }
 
 function getSnapSources(layers) {
-  return layers.map(layer => viewer.getLayer(layer).getSource());
+  return layers.map((layer) => viewer.getLayer(layer).getSource());
 }
 
 function saveFeatures() {
@@ -216,7 +216,7 @@ function setInteractions(drawType, setBySelection) {
     removeInteractions();
 
     select = new Origo.ol.interaction.Select({
-      layers: allLayersSelectable ? selectableLayers : Object.keys(editLayers).map(e => editLayers[e])
+      layers: allLayersSelectable ? selectableLayers : Object.keys(editLayers).map((e) => editLayers[e])
     });
 
     modify = new Origo.ol.interaction.Modify({
@@ -348,7 +348,7 @@ function attributesSaveHandler(feature, formEl) {
 function onAttributesSave(feature, attrs) {
   $('#o-save-button').on('click', (e) => {
     const editEl = {};
-    const checkboxValues = [];
+    let checkboxValues = [];
     const fileReaders = [];
 
     // Read values from form
@@ -406,9 +406,10 @@ function onAttributesSave(feature, attrs) {
       if (attribute.type === 'storage') {
         editEl[attribute.name] = sessionStorage[attribute.name];
       }
+      checkboxValues = [];
     });
 
-    if (fileReaders.length > 0 && fileReaders.every(reader => reader.readyState === 1)) {
+    if (fileReaders.length > 0 && fileReaders.every((reader) => reader.readyState === 1)) {
       $(document).on('imageresized', () => {
         attributesSaveHandler(feature, editEl);
       });
