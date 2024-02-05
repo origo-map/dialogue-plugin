@@ -35,7 +35,7 @@ function voteHandler(vote) {
     update: null
   };
 
-  feature.set(voterAttribute, feature.get(voterAttribute) + vote);
+  feature.set(voterAttribute, feature.get(voterAttribute)*1 + vote);
   $('.o-voter-container span').text(`${feature.get(voterAttribute)} ${buttonDefaultText}`);
   feature.unset('bbox');
   features.push(feature);
