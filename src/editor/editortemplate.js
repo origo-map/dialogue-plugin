@@ -3,7 +3,7 @@ export default (object) => {
     <div class="flex justify-center" style="margin-bottom: .5em;">
       <button id="o-dialogue-hide" class="o-dialogue-hide-button padding-small icon-smaller round light o-no-boxshadow" type="button" name="button" style="opacity: 0.7;">
         <svg class="icon">
-            <use xlink:href="#ic_menu_24px"></use>
+            <use href="#ic_menu_24px"></use>
         </svg>
       </button>
     </div>`;
@@ -21,21 +21,21 @@ export default (object) => {
       <div class="o-popover-container">
         <button id="o-editor-attribute" class="o-button-lg" type="button" name="button">
           <svg class="o-icon-24">
-              <use xlink:href="#ic_description_24px"></use>
+              <use href="#dialogue_ic_description_24px"></use>
           </svg>
         </button>
       </div>
       <div class="o-popover-container">
         <button id="o-editor-delete" class="o-button-lg" type="button" name="button">
           <svg class="o-icon-24">
-              <use xlink:href="#ic_delete_24px"></use>
+              <use href="#ic_delete_24px"></use>
           </svg>
         </button>
       </div>
       <div class="o-popover-container">
         <button id="o-editor-done" class="o-button-lg" type="button" name="button">
           <svg class="o-icon-24">
-              <use xlink:href="#ic_check_24px"></use>
+              <use href="#ic_check_24px"></use>
           </svg>
         </button>
       </div>
