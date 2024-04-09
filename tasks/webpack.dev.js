@@ -1,6 +1,6 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
+const CopyPlugin = require('copy-webpack-plugin');
 const common = require('./webpack.common.js');
-const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = merge(common, {
   output: {
@@ -12,36 +12,19 @@ module.exports = merge(common, {
     library: 'Dialogue'
   },
   mode: 'development',
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'sass-loader'
-        }
-        ]
-      },
-      {
-        test: /\.svg$/i,
-        use: [
-          {
-            loader: 'inline-loader'
-          }
-        ]
-      }
-    ]
+  devtool: 'source-map',
+  devServer: {
+    static: './',
+    port: 9008,
+    devMiddleware: {
+      writeToDisk: true
+    }
   },
   plugins: [
-    new WriteFilePlugin()
-  ],
-  devServer: {
-    contentBase: './',
-    port: 9008
-  }
+    new CopyPlugin({
+      patterns: [
+        { from: 'resources/svg/material-icons.svg', to: 'material-icons.svg' }
+      ]
+    })
+  ]
 });

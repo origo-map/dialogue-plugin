@@ -21,7 +21,7 @@ function setVote(voteStatus) {
 function getVoteStatus(featureId) {
   const storage = localStorage.dialogueVotes ? JSON.parse(localStorage.dialogueVotes) : [];
   storageArr = storage;
-  const match = storageArr.filter(element => element === featureId).shift();
+  const match = storageArr.filter((element) => element === featureId).shift();
   const hasVote = match;
   return hasVote;
 }
@@ -35,7 +35,7 @@ function voteHandler(vote) {
     update: null
   };
 
-  feature.set(voterAttribute, feature.get(voterAttribute)*1 + vote);
+  feature.set(voterAttribute, feature.get(voterAttribute) * 1 + vote);
   $('.o-voter-container span').text(`${feature.get(voterAttribute)} ${buttonDefaultText}`);
   feature.unset('bbox');
   features.push(feature);
@@ -46,15 +46,15 @@ function voteHandler(vote) {
 function render() {
   const votes = currentItem.feature.get(options.layers[currentItem.layer.get('name')]) || 0;
   let el = `<li><div class="o-voter-container">
-    <button id="o-editor-voteup-${currentItem.layer.get('name')}" class="o-button-lg o-voter-button" type="button" name="button">
-    <svg class="o-icon-24">
-    <use xlink:href="#ic_thumb_up_24px"></use>
-    </svg>
-    </button>`;
+  <button id="o-editor-voteup-${currentItem.layer.get('name')}" class="o-button-lg o-voter-button" type="button" name="button">
+  <svg class="o-icon-24">
+  <use href="#dialogue_ic_thumb_up_24px"></use>
+  </svg>
+  </button>`;
   if (type === 'upAndDown') {
     el += `<button id="o-editor-votedown-${currentItem.layer.get('name')}" class="o-button-lg o-voter-button" type="button" name="button">
       <svg class="o-icon-24">
-      <use xlink:href="#ic_thumb_down_24px"></use>
+      <use href="#dialogue_ic_thumb_down_24px"></use>
       </svg>
       </button>`;
   }

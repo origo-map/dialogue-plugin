@@ -113,8 +113,8 @@ function bindUIActions() {
     e.preventDefault();
   });
   $editDelete.on('click', (e) => {
-    dispatcher.emitToggleEdit('delete');
     $editDelete.blur();
+    dispatcher.emitToggleEdit('delete');
     e.preventDefault();
   });
   $editDone.on('click', (e) => {
@@ -125,11 +125,13 @@ function bindUIActions() {
 
   $('#o-dialogue-hide').on('click', (e) => {
     $('.o-dialogue').first().toggleClass('o-dialogue-hide');
-    $(e.currentTarget).blur();
+    $(e.currentTarget).trigger('blur');
   });
 
-  $('.o-popover-container').hover((e) => {
-    $(e.currentTarget).find('.o-popover').toggleClass('o-active');
+  $('.o-popover-container').on('mouseenter', (e) => {
+    $(e.currentTarget).find('.o-popover').addClass('o-active');
+  }).on('mouseleave', (e) => {
+    $(e.currentTarget).find('.o-popover').removeClass('o-active');
   });
 }
 

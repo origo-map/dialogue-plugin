@@ -1,52 +1,35 @@
 {
   "name": "origo-dialogue",
   "version": "1.0.0",
-  "description": "Dialogue tool plugin for Origo 2.1.x",
+  "description": "Dialogue tool plugin for Origo 2.8.x",
   "license": "MIT",
   "main": "dialogue",
   "scripts": {
-    "start": "npm run prebuild-sass | run-p watch-js watch-sass",
+    "start": "npm-run-all --parallel watch-js watch-sass",
     "watch-js": "webpack-dev-server --config ./tasks/webpack.dev.js --mode development",
-    "watch-sass": "node-sass -w --include-path scss scss/dialogue.scss ../../origo/plugins/dialogue/dialogue.css",
-    "prebuild-sass": "node-sass --include-path scss scss/dialogue.scss ../../origo/plugins/dialogue/dialogue.css",
-    "build": "webpack --config ./tasks/webpack.prod.js && npm run build-sass",
-    "build-sass": "node-sass --include-path scss scss/dialogue.scss build/css/dialogue.css"
+    "watch-sass": "node-sass -w scss/dialogue.scss ../../origo/plugins/dialogue/dialogue.css",
+    "build-sass": "node-sass scss/dialogue.scss build/css/dialogue.css",
+    "prewatch-sass": "node-sass scss/dialogue.scss ../../origo/plugins/dialogue/dialogue.css",
+    "build": "webpack --config ./tasks/webpack.prod.js && npm run build-sass"
   },
   "author": "Tonny Andersson",
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "@babel/runtime-corejs2": "^7.1.5",
-    "inline-loader": "^0.1.1",
-    "jquery": "^3.4.0",
-    "npm-run-all": "^4.1.5",
-    "whatwg-fetch": "^2.0.4"
+    "jquery": "^3.7.0",
+    "npm-run-all2": "^6.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.5",
-    "@babel/plugin-transform-runtime": "^7.1.0",
-    "@babel/preset-env": "^7.1.5",
-    "autoprefixer": "^9.3.1",
-    "babel-eslint": "^8.0.1",
-    "babel-loader": "^8.0.4",
-    "compression-webpack-plugin": "^1.1.11",
-    "css-loader": "^1.0.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.10.0",
-    "exports-loader": "^0.7.0",
-    "imports-loader": "^0.8.0",
-    "mini-css-extract-plugin": "^0.4.1",
-    "node-sass": "4.14.1",
-    "postcss-loader": "^3.0.0",
-    "sass-loader": "^7.0.3",
-    "style-loader": "^0.21.0",
-    "uglify-js": "3.2.0",
-    "uglifyjs-webpack-plugin": "^1.2.5",
-    "webpack": "^4.27.1",
-    "webpack-bundle-analyzer": "^3.0.3",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "3.11.0",
-    "webpack-merge": "^4.1.5",
-    "write-file-webpack-plugin": "^4.5.0"
+
+    "compression-webpack-plugin": "^11.1.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "mini-css-extract-plugin": "^2.8.1",
+    "node-sass": "^9.0.0",
+    "webpack": "^5.91.0",
+    "webpack-bundle-analyzer": "^4.10.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4",
+    "webpack-merge": "^5.10.0",
+    "copy-webpack-plugin": "^12.0.2"
   }
 }

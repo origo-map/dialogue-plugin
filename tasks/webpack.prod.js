@@ -1,7 +1,7 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const AggressiveMergingPlugin = require('webpack').optimize.AggressiveMergingPlugin;
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
@@ -27,46 +27,20 @@ module.exports = merge(common, {
         test: /\.(sc|c)ss$/,
         use: [{
           loader: MiniCssExtractPlugin.loader
-        },
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            plugins: [
-              require('autoprefixer')({
-                env: '> 0.5%, last 2 versions, Firefox ESR, not dead, not ie <= 10'
-              })
-            ]
-          }
-        },
-        {
-          loader: 'sass-loader'
         }
-        ]
-      },
-      {
-        test: /\.svg$/i,
-        use: [
-          {
-            loader: 'inline-loader'
-          }
         ]
       }
     ]
   },
   plugins: [
-    new UglifyJSPlugin({
-      uglifyOptions: {
-        output: {
-          beautify: false
-        }
-      }
-    }),
-    new webpack.optimize.AggressiveMergingPlugin(),
+    new AggressiveMergingPlugin(),
     new MiniCssExtractPlugin({
       filename: '../css/dialogue.css'
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'resources/svg/material-icons.svg', to: '../svg/material-icons.svg' }
+      ]
     })
   ]
 });

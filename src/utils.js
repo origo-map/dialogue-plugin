@@ -14,7 +14,7 @@ export default {
     const el = `<div id="${options.id}" class="o-button-container o-tooltip">
       <button class="o-button ${cls}">${text}
       <svg class="${iconCls}">
-      <use xlink:href="${options.src}"></use>
+      <use href="${options.src}"></use>
       </svg>
       </button>
       ${tooltip}
@@ -26,7 +26,7 @@ export default {
       <div id="${options.id}-button" class="o-menu-button">
       <div class="o-button-icon">
       <svg class="${options.iconCls}">
-      <use xlink:href="${options.src}"></use>
+      <use href="${options.src}"></use>
       </svg>
       </div>
       ${options.text}
@@ -52,7 +52,7 @@ export default {
   },
   createSvg(props) {
     const use = this.createElement('use', '', {
-      'xlink:href': props.href
+      href: props.href
     });
     return this.createElement('svg', use, {
       cls: props.cls
